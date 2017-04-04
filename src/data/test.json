@@ -1,0 +1,16 @@
+[
+  {
+    "nickname": "sh",
+    "class": "BasicLayer"
+  },
+  {
+    "nickname": "nz",
+    "class": "BasicLayer"
+  },
+  {
+    "bitwise": false,
+    "nickname": "fd",
+    "amt": 0.10000000149011612,
+    "class": "PixelFade"
+  }
+]
