@@ -5,7 +5,6 @@ import processing.core.PImage;
 import processing.core.PVector;
 import reflection.ReflectConsole;
 import vcreations.*;
-import vcreations.layers.BasicLayer;
 import vcreations.layers.Layer;
 import vcreations.pixel.PixelColor;
 import vcreations.pixel.PixelGain;
@@ -18,7 +17,6 @@ import control.KeysVisualMap;
 
 public class TestProcessing extends PApplet {
 	CA1D_ ca;
-	BasicLayer shapeLayer, imprintLayer;
 	final EllipseShape[] ell = new EllipseShape[2];
 	KeysVisualMap map = new KeysVisualMap();
 	boolean imprinting = false;
@@ -44,8 +42,6 @@ public class TestProcessing extends PApplet {
 		ca.setRuleset(r);
 		ca.setRandomStates(0.1f);
 		//ca.setState(31, 1);
-		shapeLayer = new BasicLayer(this);
-		imprintLayer = new BasicLayer(this);
 		ell[0] = new EllipseShape(this, new PVector(-50, -50));
 		ell[1] = new EllipseShape(this, new PVector(50, 50));
 		ell[1].scale(sca);
@@ -65,17 +61,8 @@ public class TestProcessing extends PApplet {
 		route();
 		//System.out.println(map.getButton('z').state);
 		
-		//PixelBrightness op = new PixelBrightness(this, 0.1f);
-		/*PixelFade op = new PixelFade();
-		op.bitwise(false);
 		final float t = (float)frameCount / 100.f;
-		background(0);
-		shapeLayer.clear();
-		shapeLayer.renderToSurface(ell, t);
-		if(imprinting) imprintLayer.imprint(shapeLayer);
-		imprintLayer.process(op);
-		imprintLayer.render(0);
-		shapeLayer.render(0);*/
+		
 		background(0);
 		
 		PixelProcess[] pix = {new PixelColor(-100, 500, -100)};

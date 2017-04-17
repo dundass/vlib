@@ -3,19 +3,15 @@ package systems.engine;
 import chaoscore.OctaveTable;
 import processing.core.*;
 import vlib.*;
-import vcreations.*;
-import vcreations.layers.BasicLayer;
-import vcreations.pixel.PixelColour;
-import vcreations.pixel.PixelDirectionalGrowth;
-import vcreations.pixel.PixelTransparency;
-import vcreations.shapes.BasicImageShape;
-import numberplay.Patterns;
+import vcreations.layers.Layer;
+import vcreations.pixel.*;
+import vcreations.shapes.*;
 
 // needs updating to the new PixelProcess operators & Layer class
 
 public class EngineScales extends PApplet {
 	//layers
-	BasicLayer shapeLayer, noiseLayer;
+	Layer shapeLayer, noiseLayer;
 	//shapes
 	BasicImageShape[] images;
 	PImage[] srcs;
@@ -38,9 +34,8 @@ public class EngineScales extends PApplet {
 	}
 	
 	public void setup() {
-		shapeLayer = new BasicLayer(this);
-		noiseLayer = new BasicLayer(this);
-		
+		shapeLayer = new Layer(this);
+		noiseLayer = new Layer(this);
 		
 		growth = new PixelDirectionalGrowth();
 		
@@ -73,8 +68,8 @@ public class EngineScales extends PApplet {
 			b.setLoc(new PVector(width / 2 + b.scale() * 10, height / 2 + b.scale() * 20));
 		}
 		
-		noiseLayer.renderToSurface(images, t);
-		noiseLayer.process(growth);
+		noiseLayer.renderToLayer(images, t);
+		//noiseLayer.process(growth);
 		if(imprinting) noiseLayer.imprint(shapeLayer);
 		
 		noiseLayer.render(0);
