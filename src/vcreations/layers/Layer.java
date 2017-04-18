@@ -17,9 +17,9 @@ public class Layer extends PGraphics2D implements VLayer {
 		setSize(p.width, p.height);
 	}
 	
-	public void render() {
-		render(0);
-	}
+//	public void render() {
+//		render(0);
+//	}
 
 	@Override
 	public void render(float t) {

@@ -72,8 +72,8 @@ public class EngineScales extends PApplet {
 		//noiseLayer.process(growth);
 		if(imprinting) noiseLayer.imprint(shapeLayer);
 		
-		noiseLayer.render(0);
-		shapeLayer.render(0);
+		noiseLayer.render();
+		shapeLayer.render();
 		
 		surface.setTitle((int)frameRate + "");
 		
