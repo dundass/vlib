@@ -21,10 +21,10 @@ Classes:
 * AnythingYouWant - make your own classes that implement VShape or PixelProcess, put them in your main program, render() them inside draw(), visual magicks
 
 # use
-the idea behind this is to create classes that implement the methods specified in both the VShape interface (for each geometric or image-based shape) and PixelProcess (for pixel-level operations that apply the same process to every pixel in a PGraphics)
+the objective when creating this was to build a formal framework for fitting reuseable shapes and pixel operations onto multiple layers (compositing)
+
+the idea is to create classes that implement the methods specified in both the VShape interface (for each geometric or image-based shape) and PixelProcess (for pixel-level operations that apply the same process to every pixel in a PGraphics)
 
 these classes will then be drawn or applied to the Layer class (or a custom layer that inherits from VLayer, but you'll have to write your own implementation of the process(PixelProcess[] op) method!)
-
-the objective when creating this was to build a formal framework for fitting reuseable shapes and pixel operations onto multiple layers (compositing)
 
 VObjects have a render(float t) method as well as a no-argument render(). this lets you send the current time in milliseconds (or num of frames) to objects eg shapes for time-varying animations. you can also feed in a separate time variable in your main program which allows reversing, skipping, looping etc of animations

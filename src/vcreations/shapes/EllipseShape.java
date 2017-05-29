@@ -40,12 +40,10 @@ public class EllipseShape implements VShape {
 		pg.popMatrix();
 	}
 
-	@Override
 	public void scale(float amt) {
 		scale = amt;
 	}
 	
-	@Override
 	public void rotate(float amt) {
 		rotate = amt;
 	}
@@ -58,7 +56,6 @@ public class EllipseShape implements VShape {
 		size = s;
 	}
 
-	@Override
 	public PVector getLoc() {
 		return loc;
 	}

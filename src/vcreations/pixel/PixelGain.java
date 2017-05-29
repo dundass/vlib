@@ -4,8 +4,8 @@ import processing.core.PGraphics;
 import vlib.PixelProcess;
 
 public class PixelGain implements PixelProcess {
-	float gain;
-	boolean bitwise;
+	public float gain;
+	public boolean bitwise;
 	
 	public PixelGain() {
 		this(1.0f, true);

@@ -6,18 +6,20 @@ import processing.core.PGraphics;
 import processing.core.PImage;
 import processing.core.PVector;
 import vlib.PixelOperation;
+import vlib.PixelProcess;
 import vlib.VImageShape;
+import vlib.VLayer;
 import vlib.VShape;
 import vlib.VSurface;
 
-public class BasicImageShape implements VImageShape {
+public class ImageShape implements VImageShape {
 	final PApplet papp;
 	PImage img;
 	PVector loc;
 	float scale = 1.0f, rotate = 0, alpha = 1.0f;
 	boolean visible = true;
 	
-	public BasicImageShape(PApplet p, String imgName) {
+	public ImageShape(PApplet p, String imgName) {
 		papp = p;
 		img = papp.loadImage(imgName);
 		img.format = PConstants.ARGB;
@@ -28,7 +30,6 @@ public class BasicImageShape implements VImageShape {
 		alpha = amt;
 	}
 
-	@Override
 	public void scale(float amt) {
 		scale = amt;
 	}
@@ -37,7 +38,6 @@ public class BasicImageShape implements VImageShape {
 		return scale;
 	}
 	
-	@Override
 	public void rotate(float amt) {
 		rotate = amt;
 	}
@@ -46,7 +46,6 @@ public class BasicImageShape implements VImageShape {
 		visible = vis;
 	}
 
-	@Override
 	public PVector getLoc() {
 		return loc;
 	}
@@ -72,22 +71,18 @@ public class BasicImageShape implements VImageShape {
 		
 	}
 
-	@Override
 	public PGraphics get() {
 		return (PGraphics) img;
 	}
 
-	@Override
 	public void set(PImage p) {
 		img = p;
 	}
 
-	@Override
 	public void clear() {
 		
 	}
 
-	@Override
 	public void process(PixelOperation op) {
 		img.loadPixels();
 		op.apply(img);
@@ -95,12 +90,30 @@ public class BasicImageShape implements VImageShape {
 	}
 
 	@Override
-	public void imprint(VSurface s) {
+	public void renderToLayer(VShape[] s, float t) {
 		
 	}
 
 	@Override
-	public void renderToSurface(VShape[] s, float t) {
+	public void process(PixelProcess[] op) {
+		img.loadPixels();
+		
+		//aggregate the operations to reduce iteration
+		
+//		for(int x = 1; x < img.width - 1; x++) {
+//			for(int y = 1; y < img.height - 1; y++) {
+//				for(int i = 0; i < op.length; i++) {	//sequential: process w op[0], then w op[1], etc
+//					img.pixels[y * img.width + x] = op[i].apply((PGraphics)img, x, y);
+//				}
+//			}
+//		}
+		
+		img.updatePixels();
+	}
+
+	@Override
+	public void imprint(VLayer l) {
+		// TODO Auto-generated method stub
 		
 	}
 

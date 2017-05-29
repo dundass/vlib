@@ -20,7 +20,7 @@ public class KeysVisualMap implements PConstants {
 		char[][] slides = { {'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o'},
 							{'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l'} };
 		buttons = new KeyButton[butts.length];
-		sliders = new KeyIncrementer[slides.length];
+		sliders = new KeyIncrementer[slides[0].length];
 		for(int i = 0; i < buttons.length; i++) buttons[i] = new KeyButton(butts[i]);
 		for(int i = 0; i < sliders.length; i++) sliders[i] = new KeyIncrementer(slides[0][i], slides[1][i]);
 	}
