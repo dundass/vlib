@@ -4,6 +4,7 @@ import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
 import reflection.ReflectConsole;
+import time.Timer;
 import vcreations.*;
 import vcreations.layers.Layer;
 import vcreations.pixel.PixelColor;
@@ -65,21 +66,21 @@ public class TestProcessing extends PApplet {
 		
 		background(0);
 		
-		PixelProcess[] pix = {new PixelColor(-100, 500, -100)};
-		layer.beginDraw();
-		layer.colorMode(HSB, 255);
-		layer.noStroke();
-		col.setBase((frameCount / 20) % 20);
-		for(int i = 0; i < 100; i++) {
-			if(frameCount % 1 == 0) {
-				layer.fill(col.get(i), 255, 255);
-				layer.rect(0, (i * height / 100), width, height / 100);
-			}
-		}
-		layer.endDraw();
-		layer.colorMode(RGB, 255);
-		layer.process(pix);
-		layer.render();
+//		PixelProcess[] pix = {new PixelColor(-100, 500, -100)};
+//		layer.beginDraw();
+//		layer.colorMode(HSB, 255);
+//		layer.noStroke();
+//		col.setBase((frameCount / 20) % 20);
+//		for(int i = 0; i < 100; i++) {
+//			if(frameCount % 1 == 0) {
+//				layer.fill(col.get(i), 255, 255);
+//				layer.rect(0, (i * height / 100), width, height / 100);
+//			}
+//		}
+//		layer.endDraw();
+//		layer.colorMode(RGB, 255);
+//		layer.process(pix);
+//		layer.render();
 		
 		surface.setTitle((int)frameRate + "");
 		

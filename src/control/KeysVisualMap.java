@@ -16,7 +16,8 @@ public class KeysVisualMap implements PConstants {
 	private KeyIncrementer[] sliders;
 	
 	public KeysVisualMap() {
-		char[] butts = {'z', 'x', 'c', 'v', 'b', 'n', 'm'};
+		//char[] butts = {'z', 'x', 'c', 'v', 'b', 'n', 'm'};
+		char[] butts = {'1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'z', 'x', 'c', 'v', 'b', 'n', 'm'};
 		char[][] slides = { {'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o'},
 							{'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l'} };
 		buttons = new KeyButton[butts.length];
@@ -60,5 +61,15 @@ public class KeysVisualMap implements PConstants {
 			if(i.up == c || i.down == c) return i;
 		}
 		return new KeyIncrementer('.', ',');
+	}
+	
+	public int getControlIndex(char c) {
+		for(int i = 0; i < buttons.length; i++) if(buttons[i].key == c) return i;
+		for(int i = 0; i < sliders.length; i++) if(sliders[i].up == c || sliders[i].down == c) return i;
+		return 0;
+	}
+	
+	public boolean ctrl() {
+		return ctrl;
 	}
 }

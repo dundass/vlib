@@ -10,7 +10,7 @@ import interpolation.Easing;
 public class OrbitingRects implements VShape {
 	final PApplet papp;
 	private int numRects, numLayers;
-	private float length, lengthTar, rotationSpeed;
+	private float length, lengthTar;
 	
 	public OrbitingRects(PApplet p, int numRects, int numLayers) {
 		papp = p;
@@ -18,7 +18,6 @@ public class OrbitingRects implements VShape {
 		this.numLayers = numLayers;
 		length = 19;
 		lengthTar = 19;
-		rotationSpeed = 1.0f;
 	}
 	
 	@Override
@@ -37,7 +36,7 @@ public class OrbitingRects implements VShape {
 				pg.pushMatrix();
 				pg.rectMode(PConstants.CENTER);
 				pg.translate(pg.width / 2, pg.height / 2);
-				float r = ((t * rotationSpeed) + ((i-1) * t / 3)) + (j * 2 * (float)Math.PI / numRects);
+				float r = (t + ((i-1) * t / 3)) + (j * 2 * (float)Math.PI / numRects);
 				pg.rotate(-r);
 				pg.noStroke();
 				pg.fill(70, 140, 250);
@@ -62,8 +61,4 @@ public class OrbitingRects implements VShape {
 		lengthTar += v;
 	}
 	
-	public void changeSpeed(float v) {
-		rotationSpeed += v;
-	}
-
 }
