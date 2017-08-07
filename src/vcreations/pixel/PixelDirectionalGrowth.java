@@ -1,6 +1,6 @@
 package vcreations.pixel;
 
-import processing.core.PGraphics;
+import processing.core.PImage;
 import vlib.PixelProcess;
 
 public class PixelDirectionalGrowth implements PixelProcess {
@@ -20,7 +20,7 @@ public class PixelDirectionalGrowth implements PixelProcess {
 	}
 	
 	@Override
-	public int apply(PGraphics in, int x, int y) {
+	public int apply(PImage in, int x, int y) {
 		int p, a, r, g, b;
 		p = in.pixels[y * in.width + x];
 		a = (p >> 24) & 0xFF;

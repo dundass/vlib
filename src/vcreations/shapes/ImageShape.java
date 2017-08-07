@@ -83,11 +83,11 @@ public class ImageShape implements VImageShape {
 		
 	}
 
-	public void process(PixelOperation op) {
-		img.loadPixels();
-		op.apply(img);
-		img.updatePixels();
-	}
+//	public void process(PixelOperation op) {
+//		img.loadPixels();
+//		op.apply(img);
+//		img.updatePixels();
+//	}
 
 	@Override
 	public void renderToLayer(VShape[] s, float t) {
@@ -100,13 +100,13 @@ public class ImageShape implements VImageShape {
 		
 		//aggregate the operations to reduce iteration
 		
-//		for(int x = 1; x < img.width - 1; x++) {
-//			for(int y = 1; y < img.height - 1; y++) {
-//				for(int i = 0; i < op.length; i++) {	//sequential: process w op[0], then w op[1], etc
-//					img.pixels[y * img.width + x] = op[i].apply((PGraphics)img, x, y);
-//				}
-//			}
-//		}
+		for(int x = 1; x < img.width - 1; x++) {
+			for(int y = 1; y < img.height - 1; y++) {
+				for(int i = 0; i < op.length; i++) {	//sequential: process w op[0], then w op[1], etc
+					img.pixels[y * img.width + x] = op[i].apply(img, x, y);
+				}
+			}
+		}
 		
 		img.updatePixels();
 	}

@@ -1,10 +1,10 @@
 package vlib;
 
-import processing.core.PGraphics;
+import processing.core.PImage;
 
 public interface PixelProcess {
 
-	public int apply(PGraphics in, int x, int y);
+	public int apply(PImage in, int x, int y);	// TBD - changed 'in' type to PImage -> ?
 	
 	default int makeColor(int r, int g, int b, int a) {
 		int rgba = 0;

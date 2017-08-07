@@ -8,11 +8,9 @@ import vcreations.layers.Layer;
 import vcreations.pixel.*;
 import vcreations.shapes.*;
 
-// for now, track by track, but later, move to multiscale shapelayer/noiselayer improviseable machine
+// for now, EngineGreatestHits, but later, move to multiscale shapelayer/noiselayer improviseable machine -> OctTable as multiscale time
 
-// truth be told, moody duke, formulate, dont u know, yankee station, fortunate, (funeral blues)
-
-// AsciiCA (tilde=off, something larger=on), OrbitingRects, sporadic sparse flickers, 
+// maybe also port some of the other shapes to multiscale - Formulate is already so (3 rings), ColouredCA2D could have 3 layers w 4 & 16 on the other 2 layers, etc
 
 public class EngineScales extends PApplet {
 	//controllers
@@ -23,8 +21,6 @@ public class EngineScales extends PApplet {
 	BlankShape blank;
 	ImageShape[] images;
 	PImage[] srcs;	// ?
-	OrbitingRects formulate;
-	ColouredCA2D yankee;
 	//'shaders'
 	PixelGain gain;
 	PixelDirectionalGrowth growth;
@@ -50,7 +46,7 @@ public class EngineScales extends PApplet {
 		shapeLayer = new Layer(this);
 		noiseLayer = new Layer(this);
 		
-		gain = new PixelGain(.85f);
+		gain = new PixelGain(.9f);
 		growth = new PixelDirectionalGrowth();
 		
 		images = new ImageShape[3];
@@ -59,13 +55,10 @@ public class EngineScales extends PApplet {
 			images[i].setLoc(new PVector((width / 2) + i * 20, (height / 2) + 10));
 			images[i].scale(0.4f * (images.length - i));
 			images[i].alpha(0.7f);
-			images[i].process(new PixelTransparency(0.8f));
-			images[i].process(new PixelProcess[]{new PixelColor(-10 + i * 10)});
+			images[i].process(new PixelProcess[]{new PixelTransparency(0.9999f), new PixelColor(-10 + i * 10)});
 		}
 		
 		blank = new BlankShape(this);
-		formulate = new OrbitingRects(this, 3, 3);
-		yankee = new ColouredCA2D(this, 8, 80);
 		
 		oct = new OctaveTable(4, 2);
 		for(int i = 0; i < oct.getNumHarmonics(); i++) {
@@ -86,27 +79,27 @@ public class EngineScales extends PApplet {
 		t += spd;
 		if(imprinting) t *= -1;
 		
-//		for(ImageShape b : images) {
-//			b.rotate(b.scale() * 3.f);
-//			b.alpha(0.6f);
-//			b.setLoc(new PVector(width / 2 + b.scale() * 10, height / 2 + b.scale() * 20));
-//		}
+		for(ImageShape b : images) {
+			b.rotate(b.scale() * 3.f);
+			b.alpha(0.6f);
+			b.setLoc(new PVector(width / 2 + b.scale() * 10, height / 2 + b.scale() * 20));
+		}
 		
-		VShape[] s = {blank};
+		VShape[] s = {images[0], images[1], images[2]};
 		
 		switch(currentShape) {
 		case 1:
-			s[0] = formulate;
+			
 			break;
 		case 2:
-			s[0] = yankee;
+			
 			break;
 		}
 		
 		noiseLayer.renderToLayer(s, t);
 		
 		PixelProcess[] p = {gain};
-		if(currentShape == 3) p[0] = growth;
+		if(currentShape == 9) p[0] = growth;	// find a better way to choose which PixelProcesses to use
 		noiseLayer.process(p);
 		//if(imprinting) noiseLayer.imprint(shapeLayer);
 		
@@ -130,16 +123,12 @@ public class EngineScales extends PApplet {
 		//shapes
 		switch(currentShape) {
 			case 1:
-				formulate.changeLength(map.getSlider('q').val * 2);
-				formulate.changeRects(map.getSlider('w').val);
+				
 				break;
 			case 2:
-				if(map.getButton('z').state) yankee.setCentreState();
-				if(map.getButton('x').state) yankee.setRandomStates(0.05f);
-				if(map.getButton('c').state) yankee.setRandomStates(0.3f);
-				if(map.getButton('v').state) yankee.setLambdaRuleset(0.4f);
+				
 				break;
-			case 3:
+			case 9:
 				if(map.getButton('1').state) growth.setPreset(0);
 				if(map.getButton('2').state) growth.setPreset(1);
 				if(map.getButton('3').state) growth.setPreset(2);
@@ -162,7 +151,6 @@ public class EngineScales extends PApplet {
 		System.out.println(key + " " + (int)key);
 		int keyNum = Character.getNumericValue(key);
 		if(!map.ctrl() && keyNum < 10 && keyNum > 0) currentShape = keyNum;
-		if(key == 'p') yankee.printRuleset();
 	}
 	
 	public void keyReleased() {

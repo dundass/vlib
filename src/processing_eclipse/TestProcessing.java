@@ -1,29 +1,30 @@
 package processing_eclipse;
 
 import processing.core.PApplet;
-import processing.core.PImage;
 import processing.core.PVector;
-import reflection.ReflectConsole;
-import time.Timer;
 import vcreations.*;
 import vcreations.layers.Layer;
 import vcreations.pixel.PixelColor;
 import vcreations.pixel.PixelGain;
 import vcreations.shapes.EllipseShape;
+import vcreations.shapes.ScanFoldPoints;
 import vcreations.utils.IterativeColour;
 import vlib.*;
-import cellularcore.CA1D_;
+import cellularcore.CA1D;
+import cellularcore.CARulesets;
 import chaoscore.*;
 import control.KeysVisualMap;
+import numberplay.Patterns;
 
 public class TestProcessing extends PApplet {
-	CA1D_ ca;
+	CA1D ca;
 	final EllipseShape[] ell = new EllipseShape[2];
 	KeysVisualMap map = new KeysVisualMap();
 	boolean imprinting = false;
 	float sca = 1.4f;
 	//PImage img;
 	Layer layer;
+	ScanFoldPoints scan;
 	PixelGain pgain;
 	IterativeColour col;
 	
@@ -37,7 +38,7 @@ public class TestProcessing extends PApplet {
 	}
 	
 	public void setup() {
-		ca = new CA1D_(4, 32);
+		ca = new CA1D(4, 32);
 		final int[] r = {0, 2, 0, 0, 3, 0, 2, 0, 3, 0, 0, 0, 3, 0, 0, 2, 1, 3, 2, 0, 1, 2, 0, 0, 0, 1, 0, 0, 0, 2, 2, 0, 2, 0, 1, 0, 3, 3, 1, 2, 0, 0, 1, 1, 2, 2, 0, 3, 0, 0, 0, 3, 0, 0, 1, 0, 3, 0, 1, 2, 0, 0, 3, 3};
 		//int[] r = {0, 1, 1, 1, 0, 1, 1, 0};
 		ca.setRuleset(r);
@@ -54,6 +55,10 @@ public class TestProcessing extends PApplet {
 		layer.endDraw();
 		
 		col = new IterativeColour(0, 255);
+		
+		scan = new ScanFoldPoints(this);
+		
+		System.out.println(Patterns.regularity(new int[]{0,0,0,0}));
 		
 		background(0);
 	}
@@ -81,6 +86,8 @@ public class TestProcessing extends PApplet {
 //		layer.colorMode(RGB, 255);
 //		layer.process(pix);
 //		layer.render();
+		
+		scan.render();
 		
 		surface.setTitle((int)frameRate + "");
 		

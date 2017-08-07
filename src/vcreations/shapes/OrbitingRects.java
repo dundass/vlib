@@ -3,7 +3,6 @@ package vcreations.shapes;
 import processing.core.PApplet;
 import processing.core.PConstants;
 import processing.core.PGraphics;
-import processing.core.PVector;
 import vlib.VShape;
 import interpolation.Easing;
 
@@ -30,6 +29,7 @@ public class OrbitingRects implements VShape {
 		// have rect width inversely proportional to rect height, so when they become really long, they become fairly thin -> complex pattterns
 		// remember, old version implements by spinning each only by the distance to the next before resetting to 0 rotation (modulo...) -> why?
 		length = Easing.ease(length, lengthTar, 0.1f);
+		pg.colorMode(PConstants.RGB);
 		
 		for(int i = 0; i < numLayers; i++) {
 			for(int j = 0; j < numRects; j++) {

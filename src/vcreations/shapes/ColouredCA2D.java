@@ -24,16 +24,17 @@ public class ColouredCA2D extends CA2D implements VShape {
 	public void render(PGraphics pg, float t) {
 		pg.colorMode(PConstants.HSB, 255);
 		pg.rectMode(PConstants.CORNER);
-	    if(papp.frameCount % 3 == 0) update();
-	    
-	    for(int i = 0; i < getXsize(); i++) {
-	      for(int j = 0; j < getYsize(); j++) {
-	        pg.noStroke();
-	        if(getState(i, j) > 0) pg.fill(255 - (getState(i, j) * 255 / getNumStates()), 255, 255);
-	        else pg.fill(0);
-	        pg.rect(i * pg.width / getXsize(), j * pg.height / getYsize(), pg.width / getXsize(), pg.height / getYsize());
-	      }
-	    }
+		//if(papp.frameCount % 3 == 0) update();
+		update();
+
+		for(int i = 0; i < getXsize(); i++) {
+			for(int j = 0; j < getYsize(); j++) {
+				pg.noStroke();
+				if(getState(i, j) > 0) pg.fill(255 - (getState(i, j) * 255 / getNumStates()), 255, 255);
+				else pg.fill(0);
+				pg.rect(i * pg.width / getXsize(), j * pg.height / getYsize(), pg.width / getXsize(), pg.height / getYsize());
+			}
+		}
 	}
 	
 	public void setCentreState() {

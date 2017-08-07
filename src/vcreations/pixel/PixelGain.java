@@ -1,6 +1,6 @@
 package vcreations.pixel;
 
-import processing.core.PGraphics;
+import processing.core.PImage;
 import vlib.PixelProcess;
 
 public class PixelGain implements PixelProcess {
@@ -11,17 +11,17 @@ public class PixelGain implements PixelProcess {
 		this(1.0f, true);
 	}
 	
-	public PixelGain(float f) {
-		this(f, true);
+	public PixelGain(float gain) {
+		this(gain, true);
 	}
 	
-	public PixelGain(float f, boolean b) {
-		gain = f;
-		bitwise = b;
+	public PixelGain(float gain, boolean bitwise) {
+		this.gain = gain;
+		this.bitwise = bitwise;
 	}
 
 	@Override
-	public int apply(PGraphics in, int x, int y) {
+	public int apply(PImage in, int x, int y) {
 		int p = in.pixels[y * in.width + x], r, g, b, a;
 		if(!bitwise) {
 			return (int)(p * gain);
