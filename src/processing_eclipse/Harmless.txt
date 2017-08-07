@@ -1,6 +1,0 @@
-
-public class Harmless {
-	public Harmless() {
-		System.out.println(4 * 4);
-	}
-}
